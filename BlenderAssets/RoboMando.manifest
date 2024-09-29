@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2067791989
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: robomandoasset
+      Dependencies: {}
