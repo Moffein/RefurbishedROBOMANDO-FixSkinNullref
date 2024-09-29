@@ -1,4 +1,6 @@
 ### Changelog
+## Version 1.1.1
+- Didn't realize that Thunderstore messes up file hierarchy. Hopefully that's fixed now
 ## Version 1.1.0
 - Fixed the mod itself not letting the game load after Robomando update
 - Removed most configurable skill stats due to Robomando adding new configurations
