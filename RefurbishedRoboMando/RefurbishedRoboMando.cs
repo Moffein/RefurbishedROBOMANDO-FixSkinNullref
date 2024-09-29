@@ -39,8 +39,8 @@ namespace RefurbishedRoboMando
             Configs.SetUp(this);
             Instance = this;
 
+            assetBundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Directory.GetParent(Info.Location).ToString(), "robomandoasset"));
             RoR2Application.onLoad += ReplaceLast;
-            assetBundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Directory.GetParent(Info.Location).ToString(), "Assets/robomandoasset"));
         }
 
         private static void ReplaceLast()
