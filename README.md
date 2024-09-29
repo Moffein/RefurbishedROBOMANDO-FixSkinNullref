@@ -12,6 +12,7 @@ This isn't just a simple skin mod, there are some other tweaks to the ``Robomand
 ## Tweaks
 #### _The following may be configured and or disabled._
 - Replacing ROBOMANDO's Survivor Icon _(Left & Right Versions)_
+- Replacing ROBOMANDO's Logbook Model
 - Disables other ROBOMANDO Skins
 - Rewritten Descriptions / Language
 - Modified Skill Stats / Behaviors
