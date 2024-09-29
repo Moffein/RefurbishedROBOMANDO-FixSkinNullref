@@ -13,12 +13,12 @@ This isn't just a simple skin mod, there are some other tweaks to the ``Robomand
 #### _The following may be configured and or disabled._
 - Replacing ROBOMANDO's Survivor Icon _(Left & Right Versions)_
 - Replacing ROBOMANDO's Logbook Model
+- Reworking Jury-Rig on Re-Wire
 - Disables other ROBOMANDO Skins
 - Rewritten Descriptions / Language
-- Modified Skill Stats / Behaviors
-<br>- Includes a faster recovery time from using Utility
+- Defaulted Stats for ``Risk of Rain Returns`` Similarity
 <br>- Doesn't interrupt sprinting when using Special on nothing
-- Modified Stats for Closer Comparability to ``Risk of Rain Returns``
+- Modified Body Stats for Closer Comparability to ``Risk of Rain Returns``
 <br>- Allows a percentage of ROBOMANDO's health to be shield instead
 
 ## Plans
@@ -32,3 +32,4 @@ I'd obviously add even more skins, hopefully with achievements tied to them.
 - **SomeoneElse** ``@notsomeoneelse``, for more programming assistance.
 - **KingEnderBrine** ``@kingenderbrine``, for the Unity Skin Builder.
 - **TheTimesweeper** ``@thetimesweeper``, for token listing logic.
+- To other mod developers answering my stupid questions, yet again.
