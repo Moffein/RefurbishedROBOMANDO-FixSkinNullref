@@ -1,10 +1,10 @@
 {
     "name": "REFURBISHED_ROBOMANDO",
-    "version_number": "1.0.0",
+    "version_number": "1.1.0",
     "website_url": "https://github.com/elementGEMO/RefurbishedROBOMANDO",
-    "description": "Sets in a new ROBOMANDO skin for the Robomando mod! Also includes other tweaks for better immersion. More skins coming soon...",
+    "description": "Sets in a new ROBOMANDO skin for Robomando! Includes toggleable tweaks. More skins coming soon... Jury-Rig Rework, and functional hotfixes.",
     "dependencies": [
-        "The_Bozos-RobomandoMod-1.0.3",
+        "The_Bozos-RobomandoMod-1.0.4",
         "RiskofThunder-R2API_Core-5.1.1",
         "RiskofThunder-R2API_Language-1.0.1"
     ]
