@@ -29,7 +29,7 @@
 
 	<ItemGroup>
 	  <Reference Include="RobomandoMod">
-	    <HintPath>Libs\RobomandoMod.dll</HintPath>
+	    <HintPath>..\RobomandoMod.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 

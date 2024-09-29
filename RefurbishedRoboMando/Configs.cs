@@ -12,6 +12,7 @@ namespace RefurbishedRoboMando
         public static ConfigEntry<bool> Enable_Skill_Stat_Changes;
         public static ConfigEntry<bool> Enable_Body_Stat_Changes;
         public static ConfigEntry<bool> Enable_Token_Changes;
+        public static ConfigEntry<bool> Enable_Jury_Rework;
     }
     public static class RoboMandoStats
     {
@@ -19,19 +20,19 @@ namespace RefurbishedRoboMando
         public static ConfigEntry<bool> Icon_Direction;
 
         // Skill Stats
-        public static ConfigEntry<float> Shoot_Damage;
-        public static ConfigEntry<float> Shoot_Coefficient;
+        public static float Shoot_Damage = 75f;
+        public static float Shoot_Coefficient = 1f;
 
-        public static ConfigEntry<float> Zap_Damage;
-        public static ConfigEntry<float> Zap_Coefficient;
-        public static ConfigEntry<float> Zap_Cooldown;
+        public static float Zap_Damage = 220f;
+        public static float Zap_Coefficient = 2f;
+        public static float Zap_Cooldown = 3f;
 
-        public static ConfigEntry<float> Dive_Splat_Duration;
-        public static ConfigEntry<float> Dive_Cooldown;
+        public static float Dive_Splat_Duration = 0.5f;
+        public static float Dive_Cooldown = 4f;
 
-        public static ConfigEntry<float> Hack_Duration;
-        public static ConfigEntry<float> Hack_Cooldown;
-        public static ConfigEntry<float> Hack_NoTarget_Cooldown;
+        public static float Hack_Duration = 3f;
+        public static float Hack_Cooldown = 5f;
+        public static float Hack_NoTarget_Cooldown = 0.5f;
 
         // Body Stats
         public static ConfigEntry<int> Health_Shield_Percent;
@@ -54,20 +55,25 @@ namespace RefurbishedRoboMando
                 "Replace ROBOMANDO Logbook Model?", true,
                 "[ True = Replaced | False = Original ]\nReplaces ROBOMANDO's Logbook model"
             );
-            RoboMandoToggle.Enable_Skin_Disable = staticPlugin.Config.Bind(
-                "! General !",
-                "Disable Non Whitelisted Skins?", true,
-                "[ True = Whitelist | False = Original ]\nRemoves non whitelisted skins, and adds a configurable whitelist"
-            );
             RoboMandoToggle.Enable_Skill_Stat_Changes = staticPlugin.Config.Bind(
                 "! General !",
                 "Enable Skill Stat Reworks?", true,
-                "[ True = Reworked | False = Original ]\nAllows configurable stats to ROBOMANDO's skills"
+                "[ True = Reworked | False = Original ]\nSet skill stats to be closer to Risk of Rain Returns ROBOMANDO"
             );
             RoboMandoToggle.Enable_Body_Stat_Changes = staticPlugin.Config.Bind(
                 "! General !",
                 "Enable Body Stat Reworks?", true,
                 "[ True = Reworked | False = Original ]\nAllows minor configurations to ROBOMANDO's base stats"
+            );
+            RoboMandoToggle.Enable_Jury_Rework = staticPlugin.Config.Bind(
+                "! General !",
+                "Rework Jury-Rig Keyword?", true,
+                "[ True = Reworked | False = Original ]\nGives the actual item, but costs HP on item rarity."
+            );
+            RoboMandoToggle.Enable_Skin_Disable = staticPlugin.Config.Bind(
+                "! General !",
+                "Disable Non Whitelisted Skins?", true,
+                "[ True = Whitelist | False = Original ]\nRemoves non whitelisted skins, and adds a configurable whitelist"
             );
             RoboMandoToggle.Enable_Token_Changes = staticPlugin.Config.Bind(
                 "! General !",
@@ -83,7 +89,7 @@ namespace RefurbishedRoboMando
                     "[ True = Face Left | False = Face Right ]\nWhat direction the icon faces"
                 );
             }
-
+            /*
             if (RoboMandoToggle.Enable_Skill_Stat_Changes.Value)
             {
                 string skillPrefix = "Skill Statistics";
@@ -146,6 +152,7 @@ namespace RefurbishedRoboMando
                     "[ 0.5 = 0.5 Seconds | Original = 2 Seconds ]\nSpecial cooldown timer when no target"
                 );
             }
+            */
             if (RoboMandoToggle.Enable_Body_Stat_Changes.Value)
             {
                 string bodyPrefix  = "Body Statistics";

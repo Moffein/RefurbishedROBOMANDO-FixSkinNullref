@@ -8,7 +8,10 @@
             cIsDamage,
             cIsHealth,
             cIsUtility,
-            cIsHealing
+            cIsHealing,
+            cDeath,
+            cSub,
+            cKeywordName
         };
 
         public static string Style(this string self, FontColor style)
