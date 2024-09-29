@@ -10,10 +10,7 @@ using System.Collections.Generic;
 using MonoMod.RuntimeDetour;
 using static RefurbishedRoboMando.ColorCode;
 using RobomandoMod.Survivors.Robomando;
-using R2API.Utils;
 using RobomandoMod.Survivors.Robomando.SkillStates;
-using UnityEngine.Networking;
-using System.ComponentModel;
 [assembly: HG.Reflection.SearchableAttribute.OptIn]
 
 namespace RefurbishedRoboMando
@@ -27,7 +24,7 @@ namespace RefurbishedRoboMando
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "noodlegemo";
         public const string PluginName = "ROBOMANDO_Refurbished";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.1.0";
 
         internal static RefurbishedRoboMando Instance { get; private set; }
         private static AssetBundle assetBundle;
