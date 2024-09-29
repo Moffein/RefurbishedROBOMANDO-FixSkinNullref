@@ -56,7 +56,8 @@ namespace RefurbishedRoboMando
             CharacterBody characterBody = roboPrefab ? roboPrefab.GetComponent<CharacterBody>() : null;
             if (characterBody == null) return;
 
-            characterBody.portraitIcon = assetBundle.LoadAsset<Sprite>("RobomandoIcon").texture;
+            if (RoboMandoStats.Icon_Direction.Value) characterBody.portraitIcon = assetBundle.LoadAsset<Sprite>("RobomandoIcon").texture;
+            else characterBody.portraitIcon = assetBundle.LoadAsset<Sprite>("RobomandoIconAlt").texture;
         }
         private static void DisableSkins()
         {

@@ -14,6 +14,9 @@ namespace RefurbishedRoboMando
     }
     public static class RoboMandoStats
     {
+        // Icon
+        public static ConfigEntry<bool> Icon_Direction;
+
         // Skill Stats
         public static ConfigEntry<float> Shoot_Damage;
         public static ConfigEntry<float> Shoot_Coefficient;
@@ -66,54 +69,63 @@ namespace RefurbishedRoboMando
                 "[ True = Rewritten | False = Original ]\nChanges ROBOMANDO's descriptive texts, required for visible skill stat changes"
             );
 
+            if (RoboMandoToggle.Enable_Icon_Change.Value)
+            {
+                RoboMandoStats.Icon_Direction = staticPlugin.Config.Bind(
+                    "Survivor Icon",
+                    "Icon Direction", true,
+                    "[ True = Face Left | False = Face Right ]\nWhat direction the icon faces"
+                );
+            }
+
             if (RoboMandoToggle.Enable_Skill_Stat_Changes.Value)
             {
-                string skillPrefix = "Skill Statistics ";
+                string skillPrefix = "Skill Statistics";
 
                 // Primary
                 RoboMandoStats.Shoot_Damage = staticPlugin.Config.Bind(
-                    skillPrefix + "Primary",
+                    skillPrefix,
                     "Primary Damage Modifier", 60f,
                     "[ 60.0 = 60% Damage | Original = 80% ]\nDamage per primary shot"
                 );
                 RoboMandoStats.Shoot_Coefficient = staticPlugin.Config.Bind(
-                    skillPrefix + "Primary",
+                    skillPrefix,
                     "Primary Coefficient Modifier", 100f,
                     "[ 100.0 = 100% Coefficient | Original = 100% ]\nChance to proc per primary shot"
                 );
 
                 // Secondary
                 RoboMandoStats.Zap_Damage = staticPlugin.Config.Bind(
-                    skillPrefix + "Secondary",
+                    skillPrefix,
                     "Secondary Damage Modifier", 180f,
                     "[ 180.0 = 180% Damage | Original = 180% ]\nDamage per secondary shot"
                 );
                 RoboMandoStats.Zap_Coefficient = staticPlugin.Config.Bind(
-                    skillPrefix + "Secondary",
+                    skillPrefix,
                     "Secondary Coefficient Modifier", 200f,
                     "[ 200.0 = 200% Coefficient | Original = 300% ]\nChance to proc per secondary shot"
                 );
                 RoboMandoStats.Zap_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix + "Secondary",
+                    skillPrefix,
                     "Secondary Cooldown", 3f,
                     "[ 3.0 = 3 Seconds | Original = 2 Seconds ]\nSecondary cooldown timer"
                 );
 
                 // Utility
                 RoboMandoStats.Dive_Splat_Duration = staticPlugin.Config.Bind(
-                    skillPrefix + "Utility",
+                    skillPrefix,
                     "Utility Splat Duration", 0.75f,
                     "[ 0.75 = 0.75 Seconds | Original = 2 Seconds ]\nTimer on falling after utility"
                 );
                 RoboMandoStats.Dive_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix + "Utility",
+                    skillPrefix,
                     "Utility Cooldown", 4f,
                     "[ 4.0 = 4 Seconds | Original = 4 Seconds ]\nUtility cooldown timer"
                 );
 
                 // Special
                 RoboMandoStats.Hack_Duration = staticPlugin.Config.Bind(
-                    skillPrefix + "Special",
+                    skillPrefix,
                     "Special Duration", 3f,
                     "[ 3.0 = 3 Seconds | Original = 3.33 Seconds ]\nHacking duration"
                 );
@@ -123,18 +135,18 @@ namespace RefurbishedRoboMando
                     "[ 5.0 = 5 Seconds | Original = 8 Seconds ]\nSpecial cooldown timer"
                 );
                 RoboMandoStats.Hack_NoTarget_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix + "Special",
+                    skillPrefix,
                     "Special Fail Cooldown", 0.5f,
                     "[ 0.5 = 0.5 Seconds | Original = 2 Seconds ]\nSpecial cooldown timer when no target"
                 );
             }
             if (RoboMandoToggle.Enable_Body_Stat_Changes.Value)
             {
-                string bodyPrefix  = "Body Statistics ";
+                string bodyPrefix  = "Body Statistics";
 
                 // Health to Shield proportion
                 RoboMandoStats.Health_Shield_Percent = staticPlugin.Config.Bind(
-                    bodyPrefix + "Health",
+                    bodyPrefix,
                     "Health to Shield Percent", 0,
                     new ConfigDescription(
                         "[ 0.0 = 0% Conversion ]\nBase Health to Shield percent",
