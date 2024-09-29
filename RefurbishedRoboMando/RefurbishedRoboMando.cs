@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using MonoMod.RuntimeDetour;
 using static RefurbishedRoboMando.ColorCode;
+[assembly: HG.Reflection.SearchableAttribute.OptIn]
 
 namespace RefurbishedRoboMando
 {
@@ -48,6 +49,12 @@ namespace RefurbishedRoboMando
             if (RoboMandoToggle.Enable_Token_Changes.Value) AddLanguageTokens();
             if (RoboMandoToggle.Enable_Skill_Stat_Changes.Value) ModifySkillStats();
             if (RoboMandoToggle.Enable_Body_Stat_Changes.Value) ModifyBodyStats();
+
+            if (RoboMandoToggle.Enable_Logbook_Change.Value)
+            {
+                GameObject model = roboPrefab.GetComponent<ModelLocator>().modelTransform.gameObject;
+                ReplaceLogbook component = model.AddComponent<ReplaceLogbook>();
+            }
         }
 
         private static void ReplaceIcon()
@@ -91,11 +98,19 @@ namespace RefurbishedRoboMando
             string tokenPrefix = "RAT_ROBOMANDO_";
             LanguageAPI.AddOverlay(tokenPrefix + "NAME", "ROBOMANDO");
             LanguageAPI.AddOverlay(tokenPrefix + "DESCRIPTION",
-                "Your ROBOMANDO Model 7 comes equipped with everything it needs to extract resources from hostile environments.<color=#CCD3E0>" + 
+                "Your ROBOMANDO Model-7 comes equipped with everything it needs to extract resources from hostile environments.<color=#CCD3E0>" + 
                 "\n\n< ! > As weak as Single Fire is, it has no fall-off damage." +
                 "\n\n< ! > Despite the short range on De-Escalate, you can utilize it to pierce through multiple enemies at once, stunning them all in series." + 
                 "\n\n< ! > Re-Wire allows instant access to any company sanctioned containers or drone utilities - make up your lack of strength and durability through stealing everything!" +
                 "\n\n< ! > Remember that ROBOMANDO's skills aren't the most effective against enemies - use your increased movement speed to maintain distance accordingly."
+            );
+
+            LanguageAPI.AddOverlay(tokenPrefix + "LORE",
+                "Order: ROBOMANDO Model-7" +
+                "\r\nTracking Number: 45133554F44495351454" +
+                "\r\n\r\nT  H  A  N  K    Y  O  U    F  O  R    P  U  R  C  H  A  S  I  N  G    T  H  I  S    R  O  B  O  M  A  N  D  O    M  O  D  E  L   -  7  .".Style(FontColor.cStack) +
+                "\r\nI  N  S  T  R  U  C  T  I  O  N  S    A  R  E    I  N  C  L  U  D  E  D     I  N    A    S  E  P  E  R  A  T  E    P  A  C  K  A  G  E  .".Style(FontColor.cStack) +
+                "\r\n\r\n... Damn."
             );
 
             LanguageAPI.AddOverlay(tokenPrefix + "PRIMARY_SHOT_DESCRIPTION", string.Format(
@@ -149,10 +164,10 @@ namespace RefurbishedRoboMando
 
             var conversionRate = RoboMandoStats.Health_Shield_Percent.Value / 100f;
 
-            roboBody.baseMaxHealth = 80f * (1f - conversionRate);
+            roboBody.baseMaxHealth = Math.Max(80f * (1f - conversionRate), 1);
             roboBody.levelMaxHealth = 28f * (1f - conversionRate);
             // Cursed
-            roboBody.baseMaxShield = 80f * (conversionRate);
+            roboBody.baseMaxShield = Math.Min(80f * (conversionRate), 79);
             roboBody.levelMaxShield = 28f * (conversionRate);
 
             roboBody.baseRegen = 3f;
@@ -201,5 +216,30 @@ namespace RefurbishedRoboMando
         }
 
         public static List<string> whitelistSkins = [];
+    }
+    public class ReplaceLogbook : MonoBehaviour
+    {
+        private ModelSkinController component;
+        private static int skinIndex;
+        private void Awake()
+        {
+            skinIndex = 0;
+            component = GetComponent<ModelSkinController>();
+            CharacterBody characterBody = BodyCatalog.FindBodyPrefab("RobomandoBody").GetComponent<CharacterBody>();
+            if (characterBody)
+            {
+                SkinDef[] skins = component.GetComponent<ModelSkinController>().skins;
+                foreach (SkinDef skinDef in skins)
+                {
+                    if (!skinDef.nameToken.Equals("NOODLEGEMO_SKIN_ROBOMANDO_NAME")) skinIndex++;
+                    break;
+                }
+                
+            }
+        }
+        private void Start()
+        {
+            if (SceneCatalog.currentSceneDef.cachedName == "logbook") component.ApplySkin(skinIndex);
+        }
     }
 }

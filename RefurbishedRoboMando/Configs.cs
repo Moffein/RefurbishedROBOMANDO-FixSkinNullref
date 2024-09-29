@@ -7,6 +7,7 @@ namespace RefurbishedRoboMando
     public static class RoboMandoToggle
     {
         public static ConfigEntry<bool> Enable_Icon_Change;
+        public static ConfigEntry<bool> Enable_Logbook_Change;
         public static ConfigEntry<bool> Enable_Skin_Disable;
         public static ConfigEntry<bool> Enable_Skill_Stat_Changes;
         public static ConfigEntry<bool> Enable_Body_Stat_Changes;
@@ -48,6 +49,11 @@ namespace RefurbishedRoboMando
                 "Replace ROBOMANDO Survivor Icon?", true,
                 "[ True = Replaced | False = Original ]\nReplaces ROBOMANDO's icon"
             );
+            RoboMandoToggle.Enable_Logbook_Change = staticPlugin.Config.Bind(
+                "! General !",
+                "Replace ROBOMANDO Logbook Model?", true,
+                "[ True = Replaced | False = Original ]\nReplaces ROBOMANDO's Logbook model"
+            );
             RoboMandoToggle.Enable_Skin_Disable = staticPlugin.Config.Bind(
                 "! General !",
                 "Disable Non Whitelisted Skins?", true,
@@ -85,8 +91,8 @@ namespace RefurbishedRoboMando
                 // Primary
                 RoboMandoStats.Shoot_Damage = staticPlugin.Config.Bind(
                     skillPrefix,
-                    "Primary Damage Modifier", 60f,
-                    "[ 60.0 = 60% Damage | Original = 80% ]\nDamage per primary shot"
+                    "Primary Damage Modifier", 75f,
+                    "[ 75.0 = 75% Damage | Original = 80% ]\nDamage per primary shot"
                 );
                 RoboMandoStats.Shoot_Coefficient = staticPlugin.Config.Bind(
                     skillPrefix,
@@ -97,8 +103,8 @@ namespace RefurbishedRoboMando
                 // Secondary
                 RoboMandoStats.Zap_Damage = staticPlugin.Config.Bind(
                     skillPrefix,
-                    "Secondary Damage Modifier", 180f,
-                    "[ 180.0 = 180% Damage | Original = 180% ]\nDamage per secondary shot"
+                    "Secondary Damage Modifier", 220f,
+                    "[ 220.0 = 220% Damage | Original = 180% ]\nDamage per secondary shot"
                 );
                 RoboMandoStats.Zap_Coefficient = staticPlugin.Config.Bind(
                     skillPrefix,
@@ -130,7 +136,7 @@ namespace RefurbishedRoboMando
                     "[ 3.0 = 3 Seconds | Original = 3.33 Seconds ]\nHacking duration"
                 );
                 RoboMandoStats.Hack_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix + "Special",
+                    skillPrefix,
                     "Special Cooldown", 5f,
                     "[ 5.0 = 5 Seconds | Original = 8 Seconds ]\nSpecial cooldown timer"
                 );
