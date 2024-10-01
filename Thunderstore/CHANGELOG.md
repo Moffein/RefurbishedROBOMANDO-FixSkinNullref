@@ -1,4 +1,6 @@
 ### Changelog
+## Version 1.1.2
+- Now that ROBOMANDO has dynamic bones on the Antenna, I made sure to update it accordingly
 ## Version 1.1.1
 - Didn't realize that Thunderstore messes up file hierarchy. Hopefully that's fixed now
 ## Version 1.1.0
