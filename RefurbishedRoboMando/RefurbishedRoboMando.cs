@@ -24,7 +24,7 @@ namespace RefurbishedRoboMando
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "noodlegemo";
         public const string PluginName = "ROBOMANDO_Refurbished";
-        public const string PluginVersion = "1.1.1";
+        public const string PluginVersion = "1.1.2";
 
         internal static RefurbishedRoboMando Instance { get; private set; }
         private static AssetBundle assetBundle;
