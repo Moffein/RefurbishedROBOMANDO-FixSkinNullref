@@ -1,25 +1,28 @@
-﻿using BepInEx;
-using BepInEx.Configuration;
-using System.Collections.Generic;
+﻿using BepInEx.Configuration;
 
 namespace RefurbishedRoboMando
 {
-    public static class RoboMandoToggle
+    public static class RefurbishConfigEntry
     {
-        public static ConfigEntry<bool> Enable_Icon_Change;
-        public static ConfigEntry<bool> Enable_Logbook_Change;
-        public static ConfigEntry<bool> Enable_Skin_Disable;
-        public static ConfigEntry<bool> Enable_Skill_Stat_Changes;
-        public static ConfigEntry<bool> Enable_Body_Stat_Changes;
-        public static ConfigEntry<bool> Enable_Token_Changes;
-        public static ConfigEntry<bool> Enable_Jury_Rework;
-    }
-    public static class RoboMandoStats
-    {
-        // Icon
-        public static ConfigEntry<bool> Icon_Direction;
+        public static ConfigEntry<bool> Replace_Icon;
+        public static ConfigEntry<Configs.IconDirection> Icon_Direction;
 
-        // Skill Stats
+        public static ConfigEntry<Configs.SkinOrder> Skin_Order;
+        public static ConfigEntry<bool> Disable_Skins;
+
+        public static ConfigEntry<bool> Replace_Tokens;
+
+        public static ConfigEntry<bool> Replace_Logbook_Model;
+        public static ConfigEntry<bool> Replace_Logbook_Lore;
+
+        public static ConfigEntry<bool> Replace_Skill_Stats;
+        public static ConfigEntry<bool> Replace_Body_Stats;
+        public static ConfigEntry<int> Health_Convert;
+
+        public static ConfigEntry<bool> Jury_Rework;
+    }
+    public static class PresetSkillStats
+    {
         public static float Shoot_Damage = 75f;
         public static float Shoot_Coefficient = 1f;
 
@@ -33,175 +36,88 @@ namespace RefurbishedRoboMando
         public static float Hack_Duration = 3f;
         public static float Hack_Cooldown = 5f;
         public static float Hack_NoTarget_Cooldown = 0.5f;
-
-        // Body Stats
-        public static ConfigEntry<int> Health_Shield_Percent;
     }
-    public static class Configs
+    public class Configs
     {
-        private static BaseUnityPlugin staticPlugin;
-        public static void SetUp(BaseUnityPlugin plugin)
+        public enum IconDirection { LEFT, RIGHT };
+        public enum SkinOrder { FIRST, LAST };
+        public Configs()
         {
-            staticPlugin = plugin;
-
-            // Skill Modification Configs
-            RoboMandoToggle.Enable_Icon_Change = staticPlugin.Config.Bind(
-                "! General !",
-                "Replace ROBOMANDO Survivor Icon?", true,
-                "[ True = Replaced | False = Original ]\nReplaces ROBOMANDO's icon"
+            // Survivor Select Icon
+            string iconPrefix = "Icon";
+            RefurbishConfigEntry.Replace_Icon = AssetStatics.plugin.Config.Bind(
+                iconPrefix,
+                "Enable Replacement", true,
+                "[ True = Replace | False = Original ]\nChanges ROBOMANDO's icon"
             );
-            RoboMandoToggle.Enable_Logbook_Change = staticPlugin.Config.Bind(
-                "! General !",
-                "Replace ROBOMANDO Logbook Model?", true,
-                "[ True = Replaced | False = Original ]\nReplaces ROBOMANDO's Logbook model"
-            );
-            RoboMandoToggle.Enable_Skill_Stat_Changes = staticPlugin.Config.Bind(
-                "! General !",
-                "Enable Skill Stat Reworks?", true,
-                "[ True = Reworked | False = Original ]\nSet skill stats to be closer to Risk of Rain Returns ROBOMANDO"
-            );
-            RoboMandoToggle.Enable_Body_Stat_Changes = staticPlugin.Config.Bind(
-                "! General !",
-                "Enable Body Stat Reworks?", true,
-                "[ True = Reworked | False = Original ]\nAllows minor configurations to ROBOMANDO's base stats"
-            );
-            RoboMandoToggle.Enable_Jury_Rework = staticPlugin.Config.Bind(
-                "! General !",
-                "Rework Jury-Rig Keyword?", true,
-                "[ True = Reworked | False = Original ]\nGives the actual item, but costs HP on item rarity."
-            );
-            RoboMandoToggle.Enable_Skin_Disable = staticPlugin.Config.Bind(
-                "! General !",
-                "Disable Non Whitelisted Skins?", true,
-                "[ True = Whitelist | False = Original ]\nRemoves non whitelisted skins, and adds a configurable whitelist"
-            );
-            RoboMandoToggle.Enable_Token_Changes = staticPlugin.Config.Bind(
-                "! General !",
-                "Enable Description Rewrite?", true,
-                "[ True = Rewritten | False = Original ]\nChanges ROBOMANDO's descriptive texts, required for visible skill stat changes"
+            RefurbishConfigEntry.Icon_Direction = AssetStatics.plugin.Config.Bind(
+                iconPrefix,
+                "Icon Direction", IconDirection.LEFT,
+                "[ Left = Risk of Rain Returns | Right = Normal ]\nChanges ROBOMANDO's icon direction"
             );
 
-            if (RoboMandoToggle.Enable_Icon_Change.Value)
-            {
-                RoboMandoStats.Icon_Direction = staticPlugin.Config.Bind(
-                    "Survivor Icon",
-                    "Icon Direction", true,
-                    "[ True = Face Left | False = Face Right ]\nWhat direction the icon faces"
-                );
-            }
-            /*
-            if (RoboMandoToggle.Enable_Skill_Stat_Changes.Value)
-            {
-                string skillPrefix = "Skill Statistics";
-
-                // Primary
-                RoboMandoStats.Shoot_Damage = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Primary Damage Modifier", 75f,
-                    "[ 75.0 = 75% Damage | Original = 80% ]\nDamage per primary shot"
-                );
-                RoboMandoStats.Shoot_Coefficient = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Primary Coefficient Modifier", 100f,
-                    "[ 100.0 = 100% Coefficient | Original = 100% ]\nChance to proc per primary shot"
-                );
-
-                // Secondary
-                RoboMandoStats.Zap_Damage = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Secondary Damage Modifier", 220f,
-                    "[ 220.0 = 220% Damage | Original = 180% ]\nDamage per secondary shot"
-                );
-                RoboMandoStats.Zap_Coefficient = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Secondary Coefficient Modifier", 200f,
-                    "[ 200.0 = 200% Coefficient | Original = 300% ]\nChance to proc per secondary shot"
-                );
-                RoboMandoStats.Zap_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Secondary Cooldown", 3f,
-                    "[ 3.0 = 3 Seconds | Original = 2 Seconds ]\nSecondary cooldown timer"
-                );
-
-                // Utility
-                RoboMandoStats.Dive_Splat_Duration = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Utility Splat Duration", 0.75f,
-                    "[ 0.75 = 0.75 Seconds | Original = 2 Seconds ]\nTimer on falling after utility"
-                );
-                RoboMandoStats.Dive_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Utility Cooldown", 4f,
-                    "[ 4.0 = 4 Seconds | Original = 4 Seconds ]\nUtility cooldown timer"
-                );
-
-                // Special
-                RoboMandoStats.Hack_Duration = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Special Duration", 3f,
-                    "[ 3.0 = 3 Seconds | Original = 3.33 Seconds ]\nHacking duration"
-                );
-                RoboMandoStats.Hack_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Special Cooldown", 5f,
-                    "[ 5.0 = 5 Seconds | Original = 8 Seconds ]\nSpecial cooldown timer"
-                );
-                RoboMandoStats.Hack_NoTarget_Cooldown = staticPlugin.Config.Bind(
-                    skillPrefix,
-                    "Special Fail Cooldown", 0.5f,
-                    "[ 0.5 = 0.5 Seconds | Original = 2 Seconds ]\nSpecial cooldown timer when no target"
-                );
-            }
-            */
-            if (RoboMandoToggle.Enable_Body_Stat_Changes.Value)
-            {
-                string bodyPrefix  = "Body Statistics";
-
-                // Health to Shield proportion
-                RoboMandoStats.Health_Shield_Percent = staticPlugin.Config.Bind(
-                    bodyPrefix,
-                    "Health to Shield Percent", 0,
-                    new ConfigDescription(
-                        "[ 0.0 = 0% Conversion ]\nBase Health to Shield percent",
-                        new AcceptableValueRange<int>(0, 100)
-                    )
-                );
-            }
-
-            if (RoboMandoToggle.Enable_Skin_Disable.Value)
-            {
-                string allowedSkins = staticPlugin.Config.Bind(
-                    "Skin Whitelist",
-                    "Allowed Skins",
-                    "NOODLEGEMO_SKIN_ROBOMANDO_NAME",
-                    "List of ROBOMANDO skins that will be ignored when disabling, comma seperated." +
-                    "\n-\nExample: NOODLEGEMO_SKIN_ROBOMANDO_NAME, DEFAULT_SKIN, ..."
-                ).Value;
-
-                FindSkinDefs(allowedSkins);
-            }
-        }
-        public static void SkinDefList(List<string> allSkins)
-        {
-            string allSkinDefs = "\n";
-            foreach (string skinToken in allSkins) { allSkinDefs += ( skinToken + ", " );}
-
-            _ = staticPlugin.Config.Bind(
-                "Skin Whitelist",
-                "All Skin Tokens",
-                "",
-                string.Format("Just for the sake of printing every single Skin Token for disabling / enabling.\n-{0}", allSkinDefs)
+            // Skin Order
+            string skinPrefix = "Skins";
+            RefurbishConfigEntry.Skin_Order = AssetStatics.plugin.Config.Bind(
+                skinPrefix,
+                "Enable Replacement", SkinOrder.FIRST,
+                "[ First = Modded Skins First | Last = Modded Skins Last ]\nChanges REFURBISHED skin order"
             );
-        } 
-        private static void FindSkinDefs(string allowedDefs)
-        {
-            string[] strings = allowedDefs.Split(',');
-            foreach (string result in strings)
-            {
-                if (string.IsNullOrEmpty(result)) continue;
-                if (string.IsNullOrEmpty(result.Trim())) continue;
-                RefurbishedRoboMando.whitelistSkins.Add(result.Trim());
-            }
+            RefurbishConfigEntry.Disable_Skins = AssetStatics.plugin.Config.Bind(
+                skinPrefix,
+                "Disable Other Skins", false,
+                "[ True = Disables | False = Keeps ]\nToggles non Refurbished ROBOMANDO skins"
+            );
+
+            // Logbook
+            string logbookPrefix = "Logbook";
+            RefurbishConfigEntry.Replace_Logbook_Model = AssetStatics.plugin.Config.Bind(
+                logbookPrefix,
+                "Enable Model Replacement", true,
+                "[ True = Replace | False = Original ]\nChanges ROBOMANDO's Logbook model"
+            );
+            RefurbishConfigEntry.Replace_Logbook_Lore = AssetStatics.plugin.Config.Bind(
+                logbookPrefix,
+                "Enable Lore Replacement", true,
+                "[ True = Replace | False = Original ]\nChanges ROBOMANDO's Logbook lore"
+            );
+
+            // Language Tokens
+            string languageToken = "Rewrites";
+            RefurbishConfigEntry.Replace_Tokens = AssetStatics.plugin.Config.Bind(
+                languageToken,
+                "Enable Rewrite", true,
+                "[ True = Rewrite | False = Original ]\nChanges ROBOMANDO's rewrite text"
+            );
+
+            // Stat Changes
+            string statPrefix = "Stats";
+            RefurbishConfigEntry.Replace_Skill_Stats = AssetStatics.plugin.Config.Bind(
+                statPrefix,
+                "Enable Skill Stat Replacement", true,
+                "[ True = Replace | False = Original ]\nChanges ROBOMANDO's skill stats to be closer to Risk of Rain Returns"
+            );
+            RefurbishConfigEntry.Replace_Body_Stats = AssetStatics.plugin.Config.Bind(
+                statPrefix,
+                "Enable Body Stat Replacement", true,
+                "[ True = Replace | False = Original ]\nChanges ROBOMANDO's body stats to be closer to Risk of Rain Returns"
+            );
+            RefurbishConfigEntry.Health_Convert = AssetStatics.plugin.Config.Bind(
+                statPrefix,
+                "Health to Shield Conversion", 0,
+                new ConfigDescription(
+                    "[ 0.0 = 0% Conversion ]\nBase health to shield percent",
+                    new AcceptableValueRange<int>(0, 100)
+                )
+            );
+
+            // Skill Reworks
+            string reworkToken = "Reworks";
+            RefurbishConfigEntry.Jury_Rework = AssetStatics.plugin.Config.Bind(
+                reworkToken,
+                "Re-Wire - Jury Rework", true,
+                "[ True = Rework | False = Original ]\nChanges Jury into Sabotage, taking the actual item from a Printer"
+            );
         }
     }
 }

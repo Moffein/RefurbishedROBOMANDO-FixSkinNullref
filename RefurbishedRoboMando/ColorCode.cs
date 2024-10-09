@@ -11,7 +11,8 @@
             cIsHealing,
             cDeath,
             cSub,
-            cKeywordName
+            cKeywordName,
+            cIsVoid
         };
 
         public static string Style(this string self, FontColor style)
