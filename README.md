@@ -9,27 +9,38 @@ This isn't just a simple skin mod, there are some other tweaks to the ``Robomand
 
 ![](https://github.com/elementGEMO/RefurbishedROBOMANDO/blob/master/GithubPreview/FullPreview.png?raw=true)
 
+### Monsoon Skin Preview Coming Soon ...
+
 ## Tweaks
 #### _The following may be configured and or disabled._
-- Replacing ROBOMANDO's Survivor Icon _(Left & Right Versions)_
-- Replacing ROBOMANDO's Logbook Model
-- Reworking Jury-Rig on Re-Wire
-- Disables other ROBOMANDO Skins
-- Rewritten Descriptions / Language
-- Defaulted Stats for ``Risk of Rain Returns`` Similarity
-<br>- Doesn't interrupt sprinting when using Special on nothing
-- Modified Body Stats for Closer Comparability to ``Risk of Rain Returns``
-<br>- Allows a percentage of ROBOMANDO's health to be shield instead
+- Replacing ROBOMANDO's select icon <sub><sup> _**(On by Default)**_ </sub></sup>
+<br>- _Left or Right configurable_ <sub><sup> _**(Left by Default)**_ </sub></sup>
+
+- ROBOMANDO Skins
+<br>- _First or Last configurable_ <sub><sup> _**(First On by Default)**_ </sub></sup>
+<br>- _Disable original skins configurable_ <sub><sup> _**(Off by Default)**_ </sub></sup>
+
+- Replacing ROBOMANDO's Logbook
+<br>- _Model and Lore configurable_ <sub><sup> _**(Both On by Default)**_ </sub></sup>
+
+- Miscellaneous Reworks
+<br>- _Skill stats rework configurable_ <sub><sup> _**(On by Default)**_ </sub></sup>
+<br> <sup> Includes Special not interrupting sprint when using it on nothing </sup>
+<br>- _Body stats rework configurable_ <sub><sup> _**(On by Default)**_ </sub></sup>
+<br> <sup> Includes Health to Shield percent conversion configurable </sup>
+<br>- _Jury-Rig rework configurable_ <sub><sup> _**(On by Default)**_ </sub></sup>
+
+- Replacing Descriptions / Language <sub><sup> _**(On by Default)**_ </sub></sup>
 
 ## Plans
 
-I'd obviously add even more skins, hopefully with achievements tied to them.
-<br>I would prioritize a new mastery skin for ROBOMANDO
+- **Meridian Mastery** Skin
+- **Grand Mastery** Skin
+- **Buzzlight Year** Skin <sub><sup> _**(With a Custom Achievement)**_ </sub></sup>
 
 ## Special Thanks
 - **Rat Man Realistic** ``@ratmanrealistic``, the creator of Robomando mod.
 <br>- **_Please pay huge respects to them!_**
 - **SomeoneElse** ``@notsomeoneelse``, for more programming assistance.
 - **KingEnderBrine** ``@kingenderbrine``, for the Unity Skin Builder.
-- **TheTimesweeper** ``@thetimesweeper``, for token listing logic.
 - To other mod developers answering my stupid questions, yet again.
