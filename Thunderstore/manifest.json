@@ -1,10 +1,10 @@
 {
     "name": "REFURBISHED_ROBOMANDO",
-    "version_number": "1.1.2",
+    "version_number": "1.2.0",
     "website_url": "https://github.com/elementGEMO/RefurbishedROBOMANDO",
-    "description": "Sets in a new ROBOMANDO skin for Robomando! Includes toggleable tweaks. More skins coming soon...",
+    "description": "Sets in new ROBOMANDO skins for Robomando! Includes toggleable tweaks. New Monsoon Mastery skin!",
     "dependencies": [
-        "The_Bozos-RobomandoMod-1.0.5",
+        "The_Bozos-RobomandoMod-1.0.6",
         "RiskofThunder-R2API_Core-5.1.1",
         "RiskofThunder-R2API_Language-1.0.1"
     ]
