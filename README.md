@@ -9,7 +9,11 @@ This isn't just a simple skin mod, there are some other tweaks to the ``Robomand
 
 ![](https://github.com/elementGEMO/RefurbishedROBOMANDO/blob/master/GithubPreview/FullPreview.png?raw=true)
 
-### Monsoon Skin Preview Coming Soon ...
+<details>
+  <summary>Monsoon Skin Preview ( SPOILERS )</summary>
+  
+  ![](https://github.com/elementGEMO/RefurbishedROBOMANDO/blob/master/GithubPreview/MonsoonPreview.png?raw=true)
+</details>
 
 ## Tweaks
 #### _The following may be configured and or disabled._
