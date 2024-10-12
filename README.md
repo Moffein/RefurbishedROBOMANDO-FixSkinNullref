@@ -12,7 +12,7 @@ This isn't just a simple skin mod, there are some other tweaks to the ``Robomand
 <details>
   <summary>Monsoon Skin Preview ( SPOILERS )</summary>
   
-  ![](https://github.com/elementGEMO/RefurbishedROBOMANDO/blob/master/GithubPreview/MonsoonPreview.png?raw=true)
+  ![](https://github.com/elementGEMO/RefurbishedROBOMANDO/blob/master/GithubPreview/SecuredPreview.png?raw=true)
 </details>
 
 ## Tweaks
