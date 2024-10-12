@@ -1,4 +1,7 @@
 ### Changelog
+## Version 1.2.1
+- Fixed the Logbook not properly showing the model after the first time
+- Added Monsoon skin preview to the README.md
 ## Version 1.2.0
 - Added a new Monsoon skin
 <br>- Tied under the pre-existing Robomando Monsoon achievement, meaning you don't have to beat Monsoon again
