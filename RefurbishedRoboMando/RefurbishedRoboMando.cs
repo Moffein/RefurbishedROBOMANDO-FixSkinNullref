@@ -21,7 +21,7 @@ namespace RefurbishedRoboMando
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "noodlegemo";
         public const string PluginName = "ROBOMANDO_Refurbished";
-        public const string PluginVersion = "1.2.0";
+        public const string PluginVersion = "1.2.1";
         public void Awake()
         {
             Log.Init(Logger);
@@ -203,6 +203,7 @@ namespace RefurbishedRoboMando
     }
     public class ReplaceCurrentSkin : MonoBehaviour
     {
+        private readonly System.Random random = new();
         private ModelSkinController component;
         private CharacterBody body;
         public bool infested;
@@ -213,12 +214,14 @@ namespace RefurbishedRoboMando
         }
         private void Start()
         {
+            if (!component) return;
             if (SceneCatalog.currentSceneDef.cachedName == "logbook")
             {
-                int listIndex = Util.CheckRoll(5, 0, null) ? 1 : 0;
+                int listIndex = Util.CheckRoll(7.5f, 0, null) ? random.Next(1, AssetStatics.skinTokens.Count - 1) : 0;
                 ChangeSkin(AssetStatics.skinTokens[listIndex]);
             }
 
+            if (!body) return;
             SkinDef currentSkin = BodyCatalog.GetBodySkins(body.bodyIndex)[body.skinIndex];
             if (currentSkin.nameToken.Equals(AssetStatics.skinTokens[1]))
             {
