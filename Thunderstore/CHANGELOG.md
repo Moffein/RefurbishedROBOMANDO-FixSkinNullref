@@ -1,4 +1,9 @@
 ### Changelog
+## Version 1.2.3
+- Didn't upload the correct skin DLL, should actually work now
+## Version 1.2.2
+- Fixed the mod... again...
+- Added back the Antenna, except I can't fix it looking even more goofy
 ## Version 1.2.1
 - Fixed the Logbook not properly showing the model after the first time
 - Added Monsoon skin preview to the README.md

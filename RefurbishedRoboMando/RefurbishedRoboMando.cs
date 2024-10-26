@@ -21,7 +21,7 @@ namespace RefurbishedRoboMando
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "noodlegemo";
         public const string PluginName = "ROBOMANDO_Refurbished";
-        public const string PluginVersion = "1.2.1";
+        public const string PluginVersion = "1.2.3";
         public void Awake()
         {
             Log.Init(Logger);

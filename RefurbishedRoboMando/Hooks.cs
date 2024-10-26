@@ -103,7 +103,7 @@ namespace RefurbishedRoboMando
                         basicIndex = component.pickupIndex;
                         DamageInfo damageInfo = new()
                         {
-                            damageType = (DamageType.BypassArmor | DamageType.NonLethal),
+                            damageType = DamageType.BypassArmor | DamageType.NonLethal,
                             procCoefficient = 0
                         };
 
